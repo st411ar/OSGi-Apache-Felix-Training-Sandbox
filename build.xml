@@ -1,0 +1,45 @@
+﻿<project name="Apache Felix Tutorial" basedir="." default="main">
+
+	<property name="dir.src" value="src" />
+	<property name="dir.lib" value="lib" />
+	<property name="dir.build" value="build" />
+	<property name="dir.classes" value="${dir.build}/classes" />
+	<property name="dir.jars" value="${dir.build}/jars" />
+	
+	<path id="classpath">
+		<fileset dir="${dir.lib}" includes="**/*.jar" />
+	</path>
+
+	<target name="main" depends="jar"/>
+
+	<target name="jar" depends="compile">
+		<mkdir dir="${dir.jars}"/>
+		<jar 
+				destfile="${dir.jars}/example1.jar" 
+				basedir="${dir.classes}" 
+				includes="tutorial/example1/**" 
+				manifest="res/manifest1.mf"/>
+		<jar 
+				destfile="${dir.jars}/example2.jar" 
+				basedir="${dir.classes}" 
+				includes="tutorial/example2/**" 
+				manifest="res/manifest2.mf"/>
+		<jar 
+				destfile="${dir.jars}/example2b.jar" 
+				basedir="${dir.classes}" 
+				includes="tutorial/example2b/**" 
+				manifest="res/manifest2b.mf"/>
+	</target>
+
+	<target name="compile" depends="clean">
+		<mkdir dir="${dir.classes}"/>
+		<javac 
+				srcdir="${dir.src}" 
+				classpathref="classpath" 
+				destdir="${dir.classes}" />
+	</target>
+
+	<target name="clean">
+		<delete dir="${dir.build}"/>
+	</target>
+</project>

@@ -1,0 +1,6 @@
+Bundle-Name: Service listener example
+Bundle-Description: A bundle that displays messages at startup and when service event occur
+Bundle-Vendor: Vitaly Kiselev
+Bundle-Version: 1.0.0
+Bundle-Activator: tutorial.example1.Activator
+Import-Package: org.osgi.framework
