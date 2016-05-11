@@ -1,34 +1,34 @@
 ﻿<project name="Apache Felix Tutorial" basedir="." default="main">
 
+
 	<property name="dir.src" value="src" />
 	<property name="dir.lib" value="lib" />
 	<property name="dir.build" value="build" />
 	<property name="dir.classes" value="${dir.build}/classes" />
 	<property name="dir.jars" value="${dir.build}/jars" />
+
 	
 	<path id="classpath">
 		<fileset dir="${dir.lib}" includes="**/*.jar" />
 	</path>
 
-	<target name="main" depends="jar"/>
+	
+	<taskdef resource="net/sf/antcontrib/antlib.xml"/>
 
+	
+	<target name="main" depends="jar"/>
+	
 	<target name="jar" depends="compile">
 		<mkdir dir="${dir.jars}"/>
-		<jar 
-				destfile="${dir.jars}/example1.jar" 
-				basedir="${dir.classes}" 
-				includes="tutorial/example1/**" 
-				manifest="res/manifest1.mf"/>
-		<jar 
-				destfile="${dir.jars}/example2.jar" 
-				basedir="${dir.classes}" 
-				includes="tutorial/example2/**" 
-				manifest="res/manifest2.mf"/>
-		<jar 
-				destfile="${dir.jars}/example2b.jar" 
-				basedir="${dir.classes}" 
-				includes="tutorial/example2b/**" 
-				manifest="res/manifest2b.mf"/>
+		<for param="order" list="1,2,2b,3,4">
+			<sequential>
+				<jar 
+						destfile="${dir.jars}/example@{order}.jar" 
+						basedir="${dir.classes}" 
+						includes="tutorial/example@{order}/**" 
+						manifest="res/manifest@{order}.mf"/>
+			</sequential>
+		</for>
 	</target>
 
 	<target name="compile" depends="clean">
