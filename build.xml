@@ -20,7 +20,7 @@
 	
 	<target name="jar" depends="compile">
 		<mkdir dir="${dir.jars}"/>
-		<for param="order" list="1,2,2b,3,4">
+		<for param="order" list="1,2,2b,3,4,5">
 			<sequential>
 				<jar 
 						destfile="${dir.jars}/example@{order}.jar" 
